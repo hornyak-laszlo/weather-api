@@ -1,4 +1,5 @@
 const Joi = require('joi')
+const { createBadRequestError } = require('../services/errorService')
 
 const citySchema = Joi.object().keys({
   cityId: Joi.number().required()
@@ -12,10 +13,8 @@ const coordSchema = Joi.object().keys({
 const validateCoords = (req, res, next) => {
   const { error } = Joi.validate(req.query, coordSchema)
   if (error) {
-    return res.status(400).json({
-      code: 'BadRequestError',
-      message: 'lat/lng required'
-    })
+    const errorMsg = createBadRequestError('lat/lng required')
+    return res.status(400).json(errorMsg)
   }
   next()
 }
@@ -23,10 +22,8 @@ const validateCoords = (req, res, next) => {
 const validateCity = (req, res, next) => {
   const { error } = Joi.validate(req.params, citySchema)
   if (error) {
-    return res.status(400).json({
-      code: 'BadRequestError',
-      message: 'cityId must be number'
-    })
+    const errorMsg = createBadRequestError('cityId must be number')
+    return res.status(400).json(errorMsg)
   }
   next()
 }
