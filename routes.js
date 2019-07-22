@@ -1,11 +1,11 @@
 const express = require('express')
-const weatherController = require('./controllers/weatherController')
-
+const { getCities, getCity, getWeatherByCity } = require('./controllers/weatherController')
+const { validateCoords, validateCity } = require('./services/validatorService')
 const apiRoutes = express.Router()
 
 // Endpoints
-apiRoutes.get('/cities', weatherController.getCities)
-apiRoutes.get('/cities/:cityId', weatherController.getCity)
-apiRoutes.get('/cities/:cityId/weather', weatherController.getWeatherByCity)
+apiRoutes.get('/cities', validateCoords, getCities)
+apiRoutes.get('/cities/:cityId', validateCity, getCity)
+apiRoutes.get('/cities/:cityId/weather', validateCity, getWeatherByCity)
 
 module.exports = apiRoutes

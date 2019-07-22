@@ -1,4 +1,5 @@
 const Cities = require('../models/cities')
+const MAX_DISTANCE = 10000 // 10km
 
 const findById = async (id) => {
   const city = await Cities.findById({ _id: id })
@@ -12,7 +13,7 @@ const findNearByCoord = async (lat, lng) => {
         $geometry: {
           type: 'Point',
           coordinates: [lng, lat] },
-        $maxDistance: 10000
+        $maxDistance: MAX_DISTANCE
       }
     }
   })
