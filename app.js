@@ -6,6 +6,8 @@ const morgan = require('morgan')
 const logger = require('./winston')
 const mongoose = require('mongoose')
 
+const weatherController = require('./controllers/weatherController')
+
 const { MONGO_URL } = require('./config')
 mongoose.connect(MONGO_URL, { useNewUrlParser: true, useFindAndModify: false })
 const db = mongoose.connection
@@ -32,5 +34,10 @@ const server = require('http').Server(app)
 server.listen(app.get('port'), () => {
   logger.info(`App is listening on port ${app.get('port')}`)
 })
+
+// Endpoints
+apiRoutes.get('/cities', weatherController.getCities)
+apiRoutes.get('/cities/:cityId', weatherController.getCity)
+apiRoutes.get('/cities/:cityId/weather', weatherController.getWeatherByCity)
 
 module.exports = app
