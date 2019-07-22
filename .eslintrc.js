@@ -1,17 +1,14 @@
 module.exports = {
   plugins: [
-    'chai-friendly',
+    'jest',
     'security'
   ],
-  rules: {
-    "no-unused-expressions": 0,
-    "chai-friendly/no-unused-expressions": 2
-  },
   env: {
-    mocha: true
+    'jest/globals': true
   },
   extends: [
     'standard',
+    'plugin:jest/recommended',
     'plugin:security/recommended'
   ]
 }

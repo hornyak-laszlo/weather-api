@@ -1,5 +1,4 @@
 const request = require('supertest')
-const { expect } = require('chai')
 const app = require('../app')
 
 describe('GET /cities/?lat={latitude}&lng={longitude}', () => {
@@ -7,44 +6,44 @@ describe('GET /cities/?lat={latitude}&lng={longitude}', () => {
     const result = await request(app)
       .get('/cities?lat=49.48&lng=8.46')
       .set('Accept', 'application/json')
-    expect(result.statusCode).to.be.equal(200)
-    expect(result.body[0].name).to.be.equal('Mannheim')
+    expect(result.statusCode).toBe(200)
+    expect(result.body[0].name).toBe('Mannheim')
   })
 
   it('should respond with Bad Request error', async () => {
     const result = await request(app)
       .get('/cities?lat=49.48&lng=a')
       .set('Accept', 'application/json')
-    expect(result.statusCode).to.be.equal(400)
-    expect(result.body.code).to.be.equal('BadRequestError')
-    expect(result.body.message).to.be.equal('lat/lng required')
+    expect(result.statusCode).toBe(400)
+    expect(result.body.code).toBe('BadRequestError')
+    expect(result.body.message).toBe('lat/lng required')
   })
 
-  it('should respond with Bad Request error', async () => {
+  it('should respond with Bad Request error if lng missing', async () => {
     const result = await request(app)
       .get('/cities?lat=49.48')
       .set('Accept', 'application/json')
-    expect(result.statusCode).to.be.equal(400)
-    expect(result.body.code).to.be.equal('BadRequestError')
-    expect(result.body.message).to.be.equal('lat/lng required')
+    expect(result.statusCode).toBe(400)
+    expect(result.body.code).toBe('BadRequestError')
+    expect(result.body.message).toBe('lat/lng required')
   })
 
-  it('should respond with Bad Request error', async () => {
+  it('should respond with Bad Request error if lat missing', async () => {
     const result = await request(app)
       .get('/cities?lng=8.46')
       .set('Accept', 'application/json')
-    expect(result.statusCode).to.be.equal(400)
-    expect(result.body.code).to.be.equal('BadRequestError')
-    expect(result.body.message).to.be.equal('lat/lng required')
+    expect(result.statusCode).toBe(400)
+    expect(result.body.code).toBe('BadRequestError')
+    expect(result.body.message).toBe('lat/lng required')
   })
 
-  it('should respond with Bad Request error', async () => {
+  it('should respond with Bad Request error if lat and lng missing', async () => {
     const result = await request(app)
       .get('/cities')
       .set('Accept', 'application/json')
-    expect(result.statusCode).to.be.equal(400)
-    expect(result.body.code).to.be.equal('BadRequestError')
-    expect(result.body.message).to.be.equal('lat/lng required')
+    expect(result.statusCode).toBe(400)
+    expect(result.body.code).toBe('BadRequestError')
+    expect(result.body.message).toBe('lat/lng required')
   })
 })
 
@@ -53,26 +52,26 @@ describe('GET /cities/:cityId', () => {
     const result = await request(app)
       .get('/cities/2873891')
       .set('Accept', 'application/json')
-    expect(result.statusCode).to.be.equal(200)
-    expect(result.body.name).to.be.equal('Mannheim')
+    expect(result.statusCode).toBe(200)
+    expect(result.body.name).toBe('Mannheim')
   })
 
   it('should respond with Not Found error', async () => {
     const result = await request(app)
       .get('/cities/1')
       .set('Accept', 'application/json')
-    expect(result.statusCode).to.be.equal(404)
-    expect(result.body.code).to.be.equal('NotFoundError')
-    expect(result.body.message).to.be.equal('not found')
+    expect(result.statusCode).toBe(404)
+    expect(result.body.code).toBe('NotFoundError')
+    expect(result.body.message).toBe('not found')
   })
 
   it('should respond with Bad Request error', async () => {
     const result = await request(app)
       .get('/cities/a')
       .set('Accept', 'application/json')
-    expect(result.statusCode).to.be.equal(400)
-    expect(result.body.code).to.be.equal('BadRequestError')
-    expect(result.body.message).to.be.equal('cityId must be number')
+    expect(result.statusCode).toBe(400)
+    expect(result.body.code).toBe('BadRequestError')
+    expect(result.body.message).toBe('cityId must be number')
   })
 })
 
@@ -81,25 +80,25 @@ describe('GET /cities/:cityId/weather', () => {
     const result = await request(app)
       .get('/cities/2873891')
       .set('Accept', 'application/json')
-    expect(result.statusCode).to.be.equal(200)
-    expect(result.body.name).to.be.equal('Mannheim')
+    expect(result.statusCode).toBe(200)
+    expect(result.body.name).toBe('Mannheim')
   })
 
   it('should respond with Not Found error', async () => {
     const result = await request(app)
       .get('/cities/1/weather')
       .set('Accept', 'application/json')
-    expect(result.statusCode).to.be.equal(404)
-    expect(result.body.code).to.be.equal('NotFoundError')
-    expect(result.body.message).to.be.equal('not found')
+    expect(result.statusCode).toBe(404)
+    expect(result.body.code).toBe('NotFoundError')
+    expect(result.body.message).toBe('not found')
   })
 
   it('should respond with Bad Request error', async () => {
     const result = await request(app)
       .get('/cities/a/weather')
       .set('Accept', 'application/json')
-    expect(result.statusCode).to.be.equal(400)
-    expect(result.body.code).to.be.equal('BadRequestError')
-    expect(result.body.message).to.be.equal('cityId must be number')
+    expect(result.statusCode).toBe(400)
+    expect(result.body.code).toBe('BadRequestError')
+    expect(result.body.message).toBe('cityId must be number')
   })
 })

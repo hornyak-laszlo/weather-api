@@ -7,11 +7,11 @@
   "scripts": {
     "start": "NODE_ENV=production node app.js",
     "dev": "NODE_ENV=development nodemon app.js",
-    "test": "NODE_ENV=test mocha",
+    "test": "NODE_ENV=test jest --forceExit",
     "lint": "eslint ./"
   },
-  "standard": {
-    "env": "mocha"
+  "jest": {
+    "testEnvironment": "node"
   },
   "husky": {
     "hooks": {
@@ -25,25 +25,23 @@
     "express": "4.17.1",
     "helmet": "3.19.0",
     "joi": "14.3.1",
-    "mongoose": "5.6.5",
+    "mongoose": "5.6.6",
     "morgan": "1.9.1",
     "winston": "3.2.1",
     "winston-daily-rotate-file": "3.10.0"
   },
   "devDependencies": {
-    "chai": "4.2.0",
-    "eslint": "6.0.1",
+    "eslint": "6.1.0",
     "eslint-config-standard": "13.0.1",
-    "eslint-plugin-chai-friendly": "0.4.1",
-    "eslint-plugin-import": "2.18.1",
+    "eslint-plugin-import": "2.18.2",
+    "eslint-plugin-jest": "22.13.4",
     "eslint-plugin-node": "9.1.0",
     "eslint-plugin-promise": "4.2.1",
     "eslint-plugin-security": "1.4.0",
     "eslint-plugin-standard": "4.0.0",
     "husky": "3.0.1",
-    "mocha": "6.2.0",
+    "jest": "24.8.0",
     "nodemon": "1.19.1",
-    "should": "13.2.3",
     "supertest": "4.0.2"
   }
 }
