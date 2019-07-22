@@ -1,4 +1,4 @@
-const logger = require('../winston')
+const logger = require('./loggerService')
 
 const createInternalServerError = (err) => {
   logger.error(`${err}`)

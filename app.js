@@ -3,7 +3,7 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const helmet = require('helmet')
 const morgan = require('morgan')
-const logger = require('./winston')
+const logger = require('./services/loggerService')
 const mongoose = require('mongoose')
 const apiRoutes = require('./routes')
 
