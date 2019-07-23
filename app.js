@@ -8,7 +8,7 @@ const logger = require('./services/loggerService')
 const apiRoutes = require('./services/routeService')
 
 const { MONGO_URL } = require('./config')
-mongoose.connect(MONGO_URL, { useNewUrlParser: true, useFindAndModify: false })
+mongoose.connect(MONGO_URL, { useCreateIndex: true, useNewUrlParser: true, useFindAndModify: false })
 const db = mongoose.connection
 db.on('error', (err) => logger.error('Mongoose connection error', err))
 db.once('open', () => logger.info('Mongoose connected successfully'))
@@ -33,4 +33,4 @@ server.listen(app.get('port'), () => {
   logger.info(`App is listening on port ${app.get('port')}`)
 })
 
-module.exports = app
+module.exports = server

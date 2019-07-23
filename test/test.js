@@ -1,5 +1,28 @@
 const request = require('supertest')
 const app = require('../app')
+const Cities = require('../models/cities')
+
+beforeAll(async () => {
+  await Cities.create({
+    _id: 2873891,
+    location: {
+      coordinates: [
+        8.46472,
+        49.488331
+      ],
+      type: 'Point'
+    },
+    name: 'Mannheim',
+    country: 'DE',
+    lat: 49.488331,
+    lng: 8.46472
+  })
+})
+
+afterAll(async () => {
+  await Cities.deleteOne({ _id: 2873891 })
+  await app.close()
+})
 
 describe('GET /cities/?lat={latitude}&lng={longitude}', () => {
   it('should respond with the cities within 10km radius of Mannheim', async () => {
