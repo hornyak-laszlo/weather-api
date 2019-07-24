@@ -34,3 +34,9 @@ To check your linting errors
 ```shell
 npm run lint
 ```
+
+To fill up your MongoDB with the cities (it takes a while, till all the 209579 records are saved)
+
+```shell
+node mongoSync.js
+```
