@@ -104,7 +104,17 @@ describe('GET /cities/:cityId/weather', () => {
       .get('/cities/2873891/weather')
       .set('Accept', 'application/json')
     expect(result.statusCode).toBe(200)
-    expect(result.body.name).toBe('Mannheim')
+    expect(result.body.type).toBeDefined()
+    expect(result.body.type_description).toBeDefined()
+    expect(result.body.sunrise).toBeDefined()
+    expect(result.body.sunrset).toBeDefined()
+    expect(result.body.temp).toBeDefined()
+    expect(result.body.temp_min).toBeDefined()
+    expect(result.body.temp_max).toBeDefined()
+    expect(result.body.pressure).toBeDefined()
+    expect(result.body.humidity).toBeDefined()
+    expect(result.body.clouds_percent).toBeDefined()
+    expect(result.body.wind_speed).toBeDefined()
   })
 
   it('should respond with Not Found error', async () => {
