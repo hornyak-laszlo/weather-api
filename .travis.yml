@@ -6,8 +6,9 @@ node_js:
 before_script:
   - cp ./config/config.js.tpl ./config/development.js
   - cp ./config/config.js.tpl ./config/production.js
-  - touch ./config/test.js
-  - echo $TEST_CONFIG >> ./config/test.js
+  - cp ./config/config.js.tpl ./config/test.js
+  - export OPENWEATHER_API_APPID=$OPENWEATHER_API_APPID
+  - export MONGO_URL=$MONGO_URL
 script:
   - npm install
   - npm test
