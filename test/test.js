@@ -101,7 +101,7 @@ describe('GET /cities/:cityId', () => {
 describe('GET /cities/:cityId/weather', () => {
   it('should respond with weather data for Mannheim', async () => {
     const result = await request(app)
-      .get('/cities/2873891')
+      .get('/cities/2873891/weather')
       .set('Accept', 'application/json')
     expect(result.statusCode).toBe(200)
     expect(result.body.name).toBe('Mannheim')
