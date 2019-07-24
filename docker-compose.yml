@@ -1,0 +1,22 @@
+version: '2'
+services:
+  mongo:
+    container_name: mongodb
+    image: mongo
+    ports:
+    - '27017:27017'
+  app:
+    container_name: weather-api
+    restart: always
+    environment:
+      NODE_ENV: production
+    build: .
+    ports:
+    - '8080:3000'
+    links:
+    - mongo
+    volumes:
+    - .:/usr/src/app
+    command:
+    - ./syncAndRun.sh
+  

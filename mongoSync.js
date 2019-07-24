@@ -31,7 +31,7 @@ db.once('open', async () => {
       try {
         await city.save()
         savedCount++
-        if (savedCount % 100 === 0) {
+        if (savedCount % 1000 === 0) {
           console.log(`Saved: ${savedCount} from ${allCount}, Failed: ${errorCount}`)
         }
       } catch (err) {
