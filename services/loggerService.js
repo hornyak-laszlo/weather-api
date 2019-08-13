@@ -40,6 +40,7 @@ const logger = winston.createLogger({
   exitOnError: false
 })
 
+// eslint-disable-next-line fp/no-mutation
 logger.stream = {
   write: (message) => {
     logger.info(message)
