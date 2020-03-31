@@ -6,9 +6,10 @@ const morgan = require('morgan')
 const mongoose = require('mongoose')
 const logger = require('./services/loggerService')
 const apiRoutes = require('./services/routeService')
+const noCache = require('nocache')
 
 const { MONGO_URL } = require('./config')
-mongoose.connect(MONGO_URL, { useCreateIndex: true, useNewUrlParser: true, useFindAndModify: false })
+mongoose.connect(MONGO_URL, { useCreateIndex: true, useNewUrlParser: true, useFindAndModify: false, useUnifiedTopology: true })
 const db = mongoose.connection
 db.on('error', (err) => logger.error('Mongoose connection error', err))
 db.once('open', () => logger.info('Mongoose connected successfully'))
@@ -20,7 +21,7 @@ app.set('port', port)
 app.use(bodyParser.json())
 app.use(cors())
 app.use(helmet())
-app.use(helmet.noCache())
+app.use(noCache())
 
 const prodFormat = ':method :url :status :response-time ms'
 const morganFormat = (process.env.NODE_ENV === 'production') ? prodFormat : 'dev'
