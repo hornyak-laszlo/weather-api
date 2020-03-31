@@ -12,7 +12,8 @@ const findNearByCoord = async (lat, lng) => {
       $near: {
         $geometry: {
           type: 'Point',
-          coordinates: [lng, lat] },
+          coordinates: [lng, lat]
+        },
         $maxDistance: MAX_DISTANCE
       }
     }
