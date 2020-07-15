@@ -1,13 +1,12 @@
-FROM node:8.6-alpine
+FROM node:12-alpine
 
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+WORKDIR /app
 
-COPY package.json ./
-RUN npm install
-
+COPY package*.json ./
+RUN npm install --only=production
 COPY . .
 
-EXPOSE 3000
+ENV PORT 8080
+ENV HOST 0.0.0.0
 
 CMD ["npm", "start"]
