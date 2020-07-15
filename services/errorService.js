@@ -1,7 +1,5 @@
-const logger = require('./loggerService')
-
 const createInternalServerError = (err) => {
-  logger.error(`${err}`)
+  console.error(`${err}`)
   return {
     code: 'InternalServerError',
     message: 'something wen\'t wrong'
