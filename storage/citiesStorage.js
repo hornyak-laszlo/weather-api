@@ -6,6 +6,11 @@ const findById = async (id) => {
   return city
 }
 
+const findByName = async (name) => {
+  const city = await Cities.findOne({ name: { $regex: `^${name}$`, $options: 'i' } }, { name: 1, lat: 1, lng: 1 })
+  return city
+}
+
 const findNearByCoord = async (lat, lng) => {
   const cities = await Cities.find({
     location: {
@@ -22,6 +27,7 @@ const findNearByCoord = async (lat, lng) => {
 }
 
 module.exports = {
+  findByName,
   findNearByCoord,
   findById
 }

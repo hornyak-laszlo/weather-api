@@ -36,7 +36,38 @@ const getWeatherByCity = async (req, res) => {
       const errorMsg = createNotFoundError()
       return res.status(404).json(errorMsg)
     }
-    const response = await weatherService.getWeatherByCityId(cityId)
+    const response = await weatherService.getWeatherByCity(city)
+    return res.status(200).json(response)
+  } catch (err) {
+    const errorMsg = createInternalServerError(err)
+    return res.status(500).json(errorMsg)
+  }
+}
+
+const getCityByName = async (req, res) => {
+  try {
+    const { name } = req.params
+    const city = await citiesStorage.findByName(name)
+    if (!city) {
+      const errorMsg = createNotFoundError()
+      return res.status(404).json(errorMsg)
+    }
+    return res.status(200).json(city)
+  } catch (err) {
+    const errorMsg = createInternalServerError(err)
+    return res.status(500).json(errorMsg)
+  }
+}
+
+const getWeatherByCityName = async (req, res) => {
+  try {
+    const { name } = req.params
+    const city = await citiesStorage.findByName(name)
+    if (!city) {
+      const errorMsg = createNotFoundError()
+      return res.status(404).json(errorMsg)
+    }
+    const response = await weatherService.getWeatherByCity(city)
     return res.status(200).json(response)
   } catch (err) {
     const errorMsg = createInternalServerError(err)
@@ -45,6 +76,8 @@ const getWeatherByCity = async (req, res) => {
 }
 
 module.exports = {
+  getCityByName,
+  getWeatherByCityName,
   getCities,
   getCity,
   getWeatherByCity

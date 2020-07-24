@@ -3,6 +3,8 @@ const Cities = require('../models/cities')
 const weatherTests = require('./weather.test')
 const cityTests = require('./city.test')
 const citiesListTests = require('./citiesList.test')
+const cityNameTests = require('./cityName.test')
+const weatherByCityNameTests = require('./weatherByCityName.test')
 
 beforeAll(async () => {
   await Cities.create({
@@ -44,4 +46,16 @@ describe('GET /cities/:cityId/weather', () => {
   it('should respond with weather data for Mannheim', weatherTests.getWeatherTest)
   it('should respond with Not Found error', weatherTests.notFoundTest)
   it('should respond with Bad Request error', weatherTests.badRequestTest)
+})
+
+describe('GET /citiesByName/:name', () => {
+  it('should respond with Mannheim city data', cityNameTests.getCityTest)
+  it('should respond with Not Found error', cityNameTests.notFoundTest)
+  it('should respond with Bad Request error', cityNameTests.badRequestTest)
+})
+
+describe('GET /citiesByName/:name/weather', () => {
+  it('should respond with weather data for Mannheim', weatherByCityNameTests.getWeatherTest)
+  it('should respond with Not Found error', weatherByCityNameTests.notFoundTest)
+  it('should respond with Bad Request error', weatherByCityNameTests.badRequestTest)
 })

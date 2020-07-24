@@ -5,6 +5,10 @@ const citySchema = Joi.object().keys({
   cityId: Joi.number().required()
 })
 
+const cityNameSchema = Joi.object().keys({
+  name: Joi.string().regex(/^[a-zA-Z, ]*$/).required()
+})
+
 const coordSchema = Joi.object().keys({
   lat: Joi.number().required(),
   lng: Joi.number().required()
@@ -28,7 +32,17 @@ const validateCity = (req, res, next) => {
   next()
 }
 
+const validateCityName = (req, res, next) => {
+  const { error } = Joi.validate(req.params, cityNameSchema)
+  if (error) {
+    const errorMsg = createBadRequestError('city name must be string')
+    return res.status(400).json(errorMsg)
+  }
+  next()
+}
+
 module.exports = {
+  validateCityName,
   validateCity,
   validateCoords
 }
